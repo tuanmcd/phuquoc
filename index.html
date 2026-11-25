@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phú Quốc 4 ngày 3 đêm</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap">
+<style>
+/* VOICE: calm road-trip planner for a couple, practical, warm.
+   IDEA: a resort-style daily program card with a self-drive route sheet.
+   PICTURE: a tall schematic of the island's west coast, stops plotted by real coordinates, one colour per day.
+   COLOUR and TYPE: deep sea teal band, white sand ground, sunset coral accent; Be Vietnam Pro throughout.
+   LAYOUT: teal header band, map + legend side by side (stacked on phones), one timeline per day, rental and contacts last. */
+:root{color-scheme:light dark;
+  --bg:light-dark(#ffffff,#0e1a1c);--ink:light-dark(#14262a,#e6f0f0);--muted:light-dark(#566a6e,#9fb4b6);
+  --line:light-dark(#dbe6e6,#26393c);--card:light-dark(#f4f9f9,#152427);
+  --sea:light-dark(#0b5d66,#0c3f45);--sea-ink:#ffffff;--sea-soft:light-dark(#cfe9ea,#1b4a50);
+  --map:light-dark(#e3f2f3,#102a2e);--grid:light-dark(#d2e7e8,#173539);
+  --d1:light-dark(#d9532c,#ff8a63);--d2:light-dark(#0b7a86,#3fc2cf);--d3:light-dark(#7a5bd0,#ab95ff);--d4:light-dark(#b07600,#f2b543);
+  --accent:light-dark(#d9532c,#ff8a63)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",sans-serif;overflow-x:clip}
+h1,h2,h3{margin:0;line-height:1.1;text-wrap:balance}
+h1{font-size:clamp(34px,6vw,52px);font-weight:700}
+h2{font-size:clamp(24px,3.4vw,32px);font-weight:700}
+h3{font-size:17px;font-weight:600;line-height:1.35}
+p{margin:0}
+a{color:inherit}
+.wrap{max-width:1040px;margin:0 auto}
+.band{padding:clamp(28px,4vw,56px) max(5vw,16px)}
+header.band{background:var(--sea);color:var(--sea-ink);padding-bottom:clamp(28px,4vw,48px)}
+header .lede{max-width:62ch;opacity:.9;margin-top:12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:5px 14px;font-size:14px;white-space:nowrap}
+.chip b{font-weight:600}
+
+.mapgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:28px;align-items:start}
+.mapbox{background:var(--map);border-radius:14px;padding:10px;display:flex;justify-content:center}
+svg#map{display:block;width:100%;max-width:440px;height:auto}
+svg .grid line{stroke:var(--grid);stroke-width:1.2}
+svg .route{fill:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;transition:opacity .25s}
+svg .stop{transition:opacity .25s}
+svg .stop circle{stroke:var(--map);stroke-width:3}
+svg .stop .n{fill:#fff;font:700 18px "Be Vietnam Pro",sans-serif;text-anchor:middle;dominant-baseline:central}
+svg .stop .l{fill:var(--ink);font:500 25px "Be Vietnam Pro",sans-serif;paint-order:stroke;stroke:var(--map);stroke-width:5px}
+svg .meta{fill:var(--muted);font:600 16px "Be Vietnam Pro",sans-serif}
+svg[data-day="1"] [data-d]:not([data-d~="1"]),svg[data-day="2"] [data-d]:not([data-d~="2"]),
+svg[data-day="3"] [data-d]:not([data-d~="3"]),svg[data-day="4"] [data-d]:not([data-d~="4"]){opacity:.1}
+.side{display:flex;flex-direction:column;gap:16px}
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+.filters button{font:inherit;font-size:15px;min-height:44px;padding:0 16px;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:999px;cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--sea);border-color:var(--sea);color:var(--sea-ink)}
+button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.legend{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px 16px;font-size:15px}
+.legend li{display:flex;gap:10px;align-items:baseline}
+.dot{flex:none;width:22px;height:22px;border-radius:50%;color:#fff;font-size:12px;font-weight:700;display:inline-grid;place-items:center;font-variant-numeric:tabular-nums}
+.note{font-size:14px;color:var(--muted)}
+
+.day{display:flex;flex-direction:column;gap:6px;margin-top:40px}
+.dayhead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:12px;border-bottom:3px solid var(--c);padding-bottom:12px}
+.dayhead .when{color:var(--c);font-weight:600;font-size:15px}
+.btn{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1.5px solid var(--c);border-radius:999px;color:var(--c);font-weight:600;font-size:15px;text-decoration:none;white-space:nowrap}
+.btn:hover{background:var(--c);color:var(--bg)}
+.links{display:flex;flex-wrap:wrap;gap:8px}
+.tl{list-style:none;margin:0;padding:0}
+.tl li{display:grid;grid-template-columns:110px minmax(0,1fr);gap:4px 20px;padding:14px 0;border-bottom:1px solid var(--line)}
+.tl li:last-child{border-bottom:0}
+.time{font-weight:700;color:var(--c);font-variant-numeric:tabular-nums;white-space:nowrap;font-size:16px}
+.what{display:flex;flex-direction:column;gap:4px}
+.what h3 a{text-decoration:none;border-bottom:1.5px dashed var(--muted)}
+.what h3 a:hover{border-bottom-style:solid}
+.what p{color:var(--muted);font-size:15px}
+.warn{color:var(--ink);font-weight:600}
+
+.alt{background:var(--card)}
+.rent{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:20px}
+.co{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:8px}
+.co .tag{font-size:13px;color:var(--muted)}
+.co p{font-size:15px}
+.num{font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap;user-select:all}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.copy{font:inherit;font-size:14px;min-height:36px;padding:0 12px;border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:8px;cursor:pointer}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px;margin-top:20px}
+.cols ul{margin:10px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:8px}
+.contacts{list-style:none;margin:10px 0 0;padding:0}
+.contacts li{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);font-size:15px}
+.foot{font-size:13px;color:var(--muted);margin-top:28px}
+@media(max-width:760px){.mapgrid{grid-template-columns:1fr}}
+@media(max-width:520px){.tl li{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="band">
+  <div class="wrap">
+    <h1>Phú Quốc 4 ngày 3 đêm</h1>
+    <p class="lede">Tự lái, đi từ nam lên bắc đảo: đêm đầu ở Bãi Trường gần sân bay và Sunset Town, hai đêm sau ở Ông Lang gần Grand World, Safari và Rạch Vẹm, nên không phải chạy ngược đường.</p>
+    <div class="chips">
+      <span class="chip"><b>Đêm 1</b> · InterContinental Phu Quoc Long Beach</span>
+      <span class="chip"><b>Đêm 2–3</b> · Mövenpick Resort Waverly</span>
+      <span class="chip"><b>Xe</b> · nhận tại InterContinental, trả tại sân bay</span>
+    </div>
+  </div>
+</header>
+
+<section class="band" aria-label="Sơ đồ lộ trình">
+  <div class="wrap mapgrid">
+    <div class="mapbox"><svg id="map" data-day="0" role="img" aria-label="Sơ đồ các điểm dừng ở Phú Quốc theo từng ngày"></svg></div>
+    <div class="side">
+      <h2>Lộ trình</h2>
+      <div class="filters" role="group" aria-label="Lọc theo ngày">
+        <button type="button" id="f0" data-f="0" aria-pressed="true">Cả chuyến</button>
+        <button type="button" id="f1" data-f="1" aria-pressed="false">Ngày 1</button>
+        <button type="button" id="f2" data-f="2" aria-pressed="false">Ngày 2</button>
+        <button type="button" id="f3" data-f="3" aria-pressed="false">Ngày 3</button>
+        <button type="button" id="f4" data-f="4" aria-pressed="false">Ngày 4</button>
+      </div>
+      <ul class="legend" id="legend"></ul>
+      <p class="note">Các điểm đặt đúng toạ độ, nhưng đường nối là đường thẳng, không phải đường thật. Bấm nút chỉ đường ở mỗi ngày để mở lộ trình lái xe trên Google Maps; bấm tên một điểm để mở vị trí của nó.</p>
+    </div>
+  </div>
+  <div class="wrap" id="days"></div>
+</section>
+
+<section class="band alt" id="thue-xe">
+  <div class="wrap">
+    <h2>Thuê xe tự lái</h2>
+    <p class="note" style="margin-top:8px">Thuê khoảng 3 ngày: nhận ở sảnh InterContinental chiều ngày 1, trả ở sân bay ngày 4.</p>
+    <div class="rent" id="rent"></div>
+    <div class="cols">
+      <div>
+        <h3>Giá tham khảo</h3>
+        <ul>
+          <li>Xe 4 chỗ như Hyundai i10: khoảng 900.000 – 1.100.000đ/ngày.</li>
+          <li>VinFast VF3: khoảng 550–600k/ngày theo đánh giá của khách. Rẻ và gọn nhưng cốp rất nhỏ; mang vali lớn thì chọn VF5 hoặc sedan.</li>
+          <li>Giá cuối tuần và mùa cao điểm thường cao hơn.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Hỏi rõ trước khi chốt</h3>
+        <ul>
+          <li>Bằng lái được chấp nhận (hạng B, tương đương B1/B2 cũ) và tiền cọc.</li>
+          <li>Phí giao xe ở InterContinental và phí nhận lại xe ở sân bay.</li>
+          <li>Bảo hiểm thân vỏ, mức khách tự chịu khi va quẹt.</li>
+          <li>Xe điện: trạm sạc gần hai resort; sạc đầy trước ngày 2.</li>
+          <li>Lúc nhận xe: quay video quanh xe, chụp mức xăng hoặc pin.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap cols" style="margin-top:0">
+    <div>
+      <h2>Lưu ý</h2>
+      <ul>
+        <li>Cáp treo Hòn Thơm chạy 9:00–11:30 và 13:30–17:00; mua vé online trước để khỏi xếp hàng.</li>
+        <li>Giờ show Kiss of the Sea và show ở Grand World có thể đổi; kiểm tra lịch trước ngày đi.</li>
+        <li>Mùa sao biển ở Rạch Vẹm khoảng tháng 11–3. Đừng nhấc sao biển khỏi nước.</li>
+        <li>Bãi Sao không có trong lịch: nhiều đánh giá gần đây phàn nàn bãi rất nhiều rác.</li>
+        <li>Đường chính ven biển đẹp nhưng nhiều xe máy và công trình; đường vào Rạch Vẹm nhỏ, đi chậm.</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Số điện thoại</h2>
+      <ul class="contacts" id="contacts"></ul>
+    </div>
+  </div>
+  <p class="wrap foot">Giờ mở cửa, giá và đánh giá lấy từ Google Maps và các bài viết tham khảo, có thể đã thay đổi. Giờ giấc trong lịch là gợi ý; chỉnh lại theo giờ bay của bạn.</p>
+</section>
+
+<script>
+{
+const S={
+  ap:{n:1,name:"Sân bay",lat:10.1628226,lng:103.9980132,d:"1 4",dx:22,dy:8,a:"start",day:1},
+  ic:{n:2,name:"InterContinental",lat:10.112443,lng:103.983512,d:"1 2",dx:-22,dy:8,a:"end",day:1},
+  st:{n:3,name:"Sunset Town",lat:10.0269031,lng:104.0079166,d:"1 2",dx:22,dy:6,a:"start",day:1},
+  ht:{n:4,name:"Hòn Thơm",lat:9.9558003,lng:104.0160918,d:"2",dx:22,dy:6,a:"start",day:2},
+  mv:{n:5,name:"Mövenpick",lat:10.2821905,lng:103.9230444,d:"2 3 4",dx:-22,dy:6,a:"end",day:2},
+  sf:{n:6,name:"Vinpearl Safari",lat:10.3370427,lng:103.8914475,d:"3",dx:22,dy:26,a:"start",day:3},
+  rv:{n:7,name:"Rạch Vẹm",lat:10.3761664,lng:103.9395492,d:"3",dx:-22,dy:-12,a:"end",day:3},
+  gw:{n:8,name:"Grand World",lat:10.3283158,lng:103.8627633,d:"3",dx:-22,dy:8,a:"end",day:3},
+  dc:{n:9,name:"Dinh Cậu",lat:10.2178,lng:103.9574,d:"4",dx:-22,dy:6,a:"end",day:4}
+};
+const DAYS=[
+ {d:1,c:"--d1",when:"Ngày 1",title:"Đến nơi, hoàng hôn Sunset Town",path:["ap","ic","st","ic"],
+  links:[["Sân bay → InterContinental",["ap","ic"]],["InterContinental → Sunset Town",["ic","st"]]],
+  rows:[
+   ["Khi đến","Sân bay → InterContinental","ap","Khoảng 15 phút. Đi xe đưa đón của resort (hỏi khi đặt phòng), taxi Xanh SM hoặc Grab."],
+   ["~14:00","Nhận phòng InterContinental","ic","Tắm biển Bãi Trường, nghỉ ngơi."],
+   ["~15:30","Nhận xe tự lái tại sảnh resort","ic","Hẹn hãng giao xe trước 16:00. Quay video quanh xe, chụp mức xăng hoặc pin, kiểm tra giấy tờ xe."],
+   ["~16:30","Sunset Town","st","Khoảng 25–30 phút. Ngắm hoàng hôn ở Cầu Hôn, xem show Kiss of the Sea và pháo hoa, ăn tối tại đây."],
+   ["Tối","Về InterContinental","ic",""]]},
+ {d:2,c:"--d2",when:"Ngày 2",title:"Cáp treo Hòn Thơm, chuyển lên Mövenpick",path:["ic","st","ht","st","mv"],
+  links:[["InterContinental → Sunset Town",["ic","st"]],["Sunset Town → Mövenpick",["st","mv"]]],
+  rows:[
+   ["Sáng","Tận hưởng InterContinental","ic","Ăn sáng, hồ bơi, biển. Trả phòng ~12:00, hành lý để trên xe."],
+   ["13:30","Cáp treo Hòn Thơm","st","Gửi xe ở ga Sunset Town. Cáp treo nghỉ trưa 11:30–13:30 nên đi chuyến 13:30. Chơi Aquatopia hoặc Exotica đến ~16:30."],
+   ["~16:30","Lái lên Mövenpick","mv","Khoảng 1 tiếng. Xe điện thì sạc đầy từ sáng."],
+   ["~18:00","Nhận phòng Mövenpick Waverly","mv","Ăn tối trong resort, nghỉ ngơi."]]},
+ {d:3,c:"--d3",when:"Ngày 3",title:"Safari, sao biển Rạch Vẹm, Grand World",path:["mv","sf","rv","gw","mv"],
+  links:[["Chỉ đường cả ngày",["mv","sf","rv","gw","mv"]]],
+  rows:[
+   ["9:00","Vinpearl Safari","sf","Mở 9:00–16:00, cần 3–4 tiếng; đi xe buýt safari trước. Thích trò chơi hơn thì thay bằng VinWonders ngay cạnh."],
+   ["13:00","Ăn trưa ở Rạch Vẹm: Sao Biển Quán","rv","Hải sản tươi, giá hợp lý. Quán có thuyền đưa ra bãi nhiều sao biển. Đường vào nhỏ, đi chậm."],
+   ["~17:00","Grand World","gw","Vào cửa miễn phí, đẹp nhất lúc lên đèn. Đi thuyền kênh Venice, xem show buổi tối, ăn tối."],
+   ["Tối","Về Mövenpick","mv","Khoảng 20 phút."]]},
+ {d:4,c:"--d4",when:"Ngày 4",title:"Dương Đông, trả xe, bay về",path:["mv","dc","ap"],
+  links:[["Mövenpick → Dinh Cậu → Sân bay",["mv","dc","ap"]]],
+  rows:[
+   ["Sáng","Thư giãn ở Mövenpick","mv","Trả phòng ~11:00–12:00."],
+   ["~12:30","Dinh Cậu","dc","Khoảng 20 phút. Đền thờ trên mỏm đá, view biển, ngay trung tâm Dương Đông."],
+   ["13:00","Ăn trưa: Hải sản Động Tôm Hùm","dc","Chọn hải sản sống, báo giá trước khi chế biến. Bình dân hơn: Phượng Hoàng hoặc Xin Chào. Mua nước mắm, tiêu làm quà quanh Dương Đông."],
+   ["Trước giờ bay","Trả xe ở sân bay","ap","Khoảng 20–25 phút từ Dương Đông. Đổ xăng hoặc sạc trước, có mặt trước giờ bay ít nhất 1,5 tiếng."]]}
+];
+const RENT=[
+ {name:"Mioto",tag:"Ứng dụng đặt xe tự lái",phone:"1900 9217",text:"Mọi xe có bảo hiểm vật chất MIC; nếu chủ xe không liên lạc được, Mioto hỗ trợ đổi xe và chuyển cọc. Hotline 9:00–21:00. Chọn Phú Quốc và đúng ngày để xem xe giao được tận resort."},
+ {name:"Châu Ken",tag:"5,0★ · 32 đánh giá · mở 24h",phone:"0372 103 263",text:"Khách khen giao xe đúng giờ tận nơi, xe mới, thủ tục rõ ràng, không phát sinh phí. Chủ yếu VF3."},
+ {name:"Mộc Nhi",tag:"5,0★ · 38 đánh giá",phone:"0912 489 498",text:"VF3 được độ lại nội thất, sạch và thơm; một khách cho biết chỉ đắt hơn khoảng 50k/ngày so với chỗ rẻ 550k."},
+ {name:"KaneEv",tag:"5,0★ · 13 đánh giá · mở 24h",phone:"0947 668 770",text:"Khách khen hợp đồng rõ ràng, giao xe đúng giờ, xe mới."},
+ {name:"Kiên Giang Xanh",tag:"Hãng lâu năm, có xe xăng",phone:"",text:"Số 73 Trần Hưng Đạo, Phú Quốc. Hợp nếu muốn sedan hoặc xe 7 chỗ thay vì xe điện nhỏ."}
+];
+const CONTACTS=[["InterContinental Phu Quoc","0297 3978 888"],["Mövenpick Resort Waverly","0297 2699 999"],["Taxi Xanh SM","1900 2088"],["Sao Biển Quán (Rạch Vẹm)","0948 766 281"],["Hải sản Động Tôm Hùm","0842 509 840"]];
+
+const ll=k=>`${S[k].lat},${S[k].lng}`;
+const pin=k=>`https://www.google.com/maps/search/?api=1&query=${ll(k)}`;
+const dir=ids=>{const o=ll(ids[0]),dst=ll(ids[ids.length-1]),w=ids.slice(1,-1).map(ll);let u=`https://www.google.com/maps/dir/?api=1&travelmode=driving&origin=${encodeURIComponent(o)}&destination=${encodeURIComponent(dst)}`;if(w.length)u+=`&waypoints=${encodeURIComponent(w.join("|"))}`;return u};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+/* map */
+const svg=document.getElementById("map"),NS="http://www.w3.org/2000/svg";
+const P=Object.values(S),lats=P.map(s=>s.lat),lngs=P.map(s=>s.lng);
+const minLat=Math.min(...lats),maxLat=Math.max(...lats),minLng=Math.min(...lngs),maxLng=Math.max(...lngs);
+const k=Math.cos((minLat+maxLat)/2*Math.PI/180),PY=50,PX=230,H=900,sc=(H-2*PY)/(maxLat-minLat);
+const W=Math.round((maxLng-minLng)*k*sc+2*PX);
+svg.setAttribute("viewBox",`0 0 ${W} ${H}`);
+const X=s=>PX+(s.lng-minLng)*k*sc,Y=s=>PY+(maxLat-s.lat)*sc;
+const el=(t,a,p)=>{const e=document.createElementNS(NS,t);for(const n in a)e.setAttribute(n,a[n]);(p||svg).appendChild(e);return e};
+const g=el("g",{class:"grid"});
+for(let x=0;x<=W;x+=100)el("line",{x1:x,y1:0,x2:x,y2:H},g);
+for(let y=0;y<=H;y+=100)el("line",{x1:0,y1:y,x2:W,y2:y},g);
+el("text",{x:W-24,y:34,class:"meta","text-anchor":"end"}).textContent="B ↑";
+const km=sc/111;
+el("line",{x1:24,y1:H-24,x2:24+5*km,y2:H-24,stroke:"currentColor","stroke-width":3,style:"color:var(--muted)"});
+el("text",{x:24,y:H-34,class:"meta"}).textContent="5 km";
+DAYS.forEach(day=>{el("polyline",{points:day.path.map(i=>`${X(S[i]).toFixed(1)},${Y(S[i]).toFixed(1)}`).join(" "),class:"route","data-d":String(day.d),style:`stroke:var(${day.c})`})});
+Object.values(S).forEach(s=>{const gr=el("g",{class:"stop","data-d":s.d});const c=DAYS[s.day-1].c;
+  el("circle",{cx:X(s),cy:Y(s),r:18,style:`fill:var(${c})`},gr);
+  el("text",{x:X(s),y:Y(s),class:"n"},gr).textContent=s.n;
+  el("text",{x:X(s)+s.dx,y:Y(s)+s.dy,class:"l","text-anchor":s.a},gr).textContent=s.name});
+document.getElementById("legend").innerHTML=Object.entries(S).map(([id,s])=>`<li><span class="dot" style="background:var(${DAYS[s.day-1].c})">${s.n}</span><a href="${pin(id)}" target="_blank" rel="noopener">${esc(s.name)}</a></li>`).join("");
+
+const btns=[...document.querySelectorAll(".filters button")];
+function setDay(v){svg.dataset.day=v;btns.forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.f===v)));try{localStorage.setItem("pq-day",v)}catch(e){}}
+btns.forEach(b=>b.addEventListener("click",()=>setDay(b.dataset.f)));
+try{const v=localStorage.getItem("pq-day");if(v)setDay(v)}catch(e){}
+
+/* days */
+document.getElementById("days").innerHTML=DAYS.map(day=>`
+ <section class="day" id="ngay-${day.d}" style="--c:var(${day.c})">
+  <div class="dayhead"><div style="display:flex;flex-direction:column;gap:6px"><span class="when">${day.when}</span><h2>${esc(day.title)}</h2></div>
+   <div class="links">${day.links.map(([t,ids])=>`<a class="btn" href="${dir(ids)}" target="_blank" rel="noopener">${esc(t)} ↗</a>`).join("")}</div></div>
+  <ol class="tl">${day.rows.map(([t,name,id,note])=>`<li><span class="time">${esc(t)}</span><div class="what"><h3><a href="${pin(id)}" target="_blank" rel="noopener">${esc(name)}</a> <span class="dot" style="background:var(${day.c});width:20px;height:20px;vertical-align:2px">${S[id].n}</span></h3>${note?`<p>${esc(note)}</p>`:""}</div></li>`).join("")}</ol>
+ </section>`).join("");
+
+/* copy helper */
+function copyBtn(btn,num,id){btn.addEventListener("click",()=>{const done=t=>{btn.textContent=t;setTimeout(()=>btn.textContent="Sao chép",1500)};
+  const fb=()=>{const r=document.createRange();r.selectNodeContents(document.getElementById(id));const s=getSelection();s.removeAllRanges();s.addRange(r);done("Đã chọn")};
+  try{navigator.clipboard.writeText(num.replace(/\s/g,"")).then(()=>done("Đã chép"),fb)}catch(e){fb()}})}
+
+document.getElementById("rent").innerHTML=RENT.map((r,i)=>`<div class="co"><h3>${esc(r.name)}</h3><span class="tag">${esc(r.tag)}</span><p>${esc(r.text)}</p>${r.phone?`<div class="row"><span class="num" id="rp${i}">${esc(r.phone)}</span><button type="button" class="copy" id="rc${i}">Sao chép</button></div>`:""}</div>`).join("");
+RENT.forEach((r,i)=>{if(r.phone)copyBtn(document.getElementById("rc"+i),r.phone,"rp"+i)});
+document.getElementById("contacts").innerHTML=CONTACTS.map(([n,p],i)=>`<li><span>${esc(n)}</span><span style="display:flex;gap:8px;align-items:center"><span class="num" id="cp${i}">${esc(p)}</span><button type="button" class="copy" id="cc${i}">Sao chép</button></span></li>`).join("");
+CONTACTS.forEach(([n,p],i)=>copyBtn(document.getElementById("cc"+i),p,"cp"+i));
+}
+</script>
+</body>
+</html>
