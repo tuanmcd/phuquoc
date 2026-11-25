@@ -66,7 +66,7 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-off
 .btn:hover{background:var(--c);color:var(--bg)}
 .links{display:flex;flex-wrap:wrap;gap:8px}
 .tl{list-style:none;margin:0;padding:0}
-.tl li{display:grid;grid-template-columns:110px minmax(0,1fr);gap:4px 20px;padding:14px 0;border-bottom:1px solid var(--line)}
+.tl li{display:grid;grid-template-columns:124px minmax(0,1fr);gap:4px 20px;padding:14px 0;border-bottom:1px solid var(--line)}
 .tl li:last-child{border-bottom:0}
 .time{font-weight:700;color:var(--c);font-variant-numeric:tabular-nums;white-space:nowrap;font-size:16px}
 .what{display:flex;flex-direction:column;gap:4px}
@@ -74,6 +74,7 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-off
 .what h3 a:hover{border-bottom-style:solid}
 .what p{color:var(--muted);font-size:15px}
 .warn{color:var(--ink);font-weight:600}
+.ev{display:inline-block;font-size:12px;font-weight:600;padding:1px 8px;border-radius:999px;background:var(--sea-soft);color:var(--ink);vertical-align:3px;margin-left:6px;white-space:nowrap}
 
 .alt{background:var(--card)}
 .rent{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:20px}
@@ -98,11 +99,11 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-off
 <header class="band">
   <div class="wrap">
     <h1>Phú Quốc 4 ngày 3 đêm</h1>
-    <p class="lede">Tự lái, đi từ nam lên bắc đảo: đêm đầu ở Bãi Trường gần sân bay và Sunset Town, hai đêm sau ở Ông Lang gần Grand World, Safari và Rạch Vẹm, nên không phải chạy ngược đường.</p>
+    <p class="lede">27–30/11/2026. Hai ngày đầu theo chương trình Cathay United Bank – Thank You Event 2026 ở InterContinental; từ chiều 28/11 thuê xe tự lái, lên phía tây bắc đảo ở Mövenpick hai đêm.</p>
     <div class="chips">
-      <span class="chip"><b>Đêm 1</b> · InterContinental Phu Quoc Long Beach</span>
-      <span class="chip"><b>Đêm 2–3</b> · Mövenpick Resort Waverly</span>
-      <span class="chip"><b>Xe</b> · nhận tại InterContinental, trả tại sân bay</span>
+      <span class="chip"><b>27/11</b> · InterContinental (theo đoàn Cathay)</span>
+      <span class="chip"><b>28–29/11</b> · Mövenpick Resort Waverly</span><span class="chip"><b>Bay</b> · 9G1209 đi 07:50 · 9G1232 về 17:10</span>
+      <span class="chip"><b>Xe</b> · nhận ở InterContinental 28/11, trả ở sân bay 30/11</span>
     </div>
   </div>
 </header>
@@ -129,7 +130,7 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-off
 <section class="band alt" id="thue-xe">
   <div class="wrap">
     <h2>Thuê xe tự lái</h2>
-    <p class="note" style="margin-top:8px">Thuê khoảng 3 ngày: nhận ở sảnh InterContinental chiều ngày 1, trả ở sân bay ngày 4.</p>
+    <p class="note" style="margin-top:8px">Hai ngày đầu đã có xe đưa đón của đoàn, nên chỉ cần thuê từ khoảng 13:30 ngày 28/11 (nhận ở sảnh InterContinental) đến khoảng 15:15 ngày 30/11 (trả ở sân bay), tức khoảng 2 ngày rưỡi.</p>
     <div class="rent" id="rent"></div>
     <div class="cols">
       <div>
@@ -159,7 +160,7 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-off
     <div>
       <h2>Lưu ý</h2>
       <ul>
-        <li>Cáp treo Hòn Thơm chạy 9:00–11:30 và 13:30–17:00; mua vé online trước để khỏi xếp hàng.</li>
+        <li>Gala Dinner tối 27/11 mặc formal. Du thuyền sáng 28/11 mặc thoải mái, mang đồ bơi, kem chống nắng, mũ, kính và CCCD.</li><li>Cáp treo Hòn Thơm chạy 9:00–11:30 và 13:30–17:00; mua vé online trước để khỏi xếp hàng.</li>
         <li>Giờ show Kiss of the Sea và show ở Grand World có thể đổi; kiểm tra lịch trước ngày đi.</li>
         <li>Mùa sao biển ở Rạch Vẹm khoảng tháng 11–3. Đừng nhấc sao biển khỏi nước.</li>
         <li>Bãi Sao không có trong lịch: nhiều đánh giá gần đây phàn nàn bãi rất nhiều rác.</li>
@@ -171,7 +172,7 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-off
       <ul class="contacts" id="contacts"></ul>
     </div>
   </div>
-  <p class="wrap foot">Giờ mở cửa, giá và đánh giá lấy từ Google Maps và các bài viết tham khảo, có thể đã thay đổi. Giờ giấc trong lịch là gợi ý; chỉnh lại theo giờ bay của bạn.</p>
+  <p class="wrap foot">Giờ mở cửa, giá và đánh giá lấy từ Google Maps và các bài viết tham khảo, có thể đã thay đổi. Lịch sự kiện 27–28/11 và giờ bay lấy từ email và Event Handbook của Cathay United Bank; phần tự túc từ chiều 28/11 là gợi ý.</p>
 </section>
 
 <script>
@@ -179,44 +180,48 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-off
 const S={
   ap:{n:1,name:"Sân bay",lat:10.1628226,lng:103.9980132,d:"1 4",dx:22,dy:8,a:"start",day:1},
   ic:{n:2,name:"InterContinental",lat:10.112443,lng:103.983512,d:"1 2",dx:-22,dy:8,a:"end",day:1},
-  st:{n:3,name:"Sunset Town",lat:10.0269031,lng:104.0079166,d:"1 2",dx:22,dy:6,a:"start",day:1},
-  ht:{n:4,name:"Hòn Thơm",lat:9.9558003,lng:104.0160918,d:"2",dx:22,dy:6,a:"start",day:2},
-  mv:{n:5,name:"Mövenpick",lat:10.2821905,lng:103.9230444,d:"2 3 4",dx:-22,dy:6,a:"end",day:2},
-  sf:{n:6,name:"Vinpearl Safari",lat:10.3370427,lng:103.8914475,d:"3",dx:22,dy:26,a:"start",day:3},
-  rv:{n:7,name:"Rạch Vẹm",lat:10.3761664,lng:103.9395492,d:"3",dx:-22,dy:-12,a:"end",day:3},
-  gw:{n:8,name:"Grand World",lat:10.3283158,lng:103.8627633,d:"3",dx:-22,dy:8,a:"end",day:3},
-  dc:{n:9,name:"Dinh Cậu",lat:10.2178,lng:103.9574,d:"4",dx:-22,dy:6,a:"end",day:4}
+  st:{n:3,name:"Sunset Town",lat:10.0269031,lng:104.0079166,d:"2",dx:22,dy:8,a:"start",day:2},
+  mv:{n:4,name:"Mövenpick",lat:10.2821905,lng:103.9230444,d:"2 3 4",dx:-22,dy:8,a:"end",day:2},
+  sf:{n:5,name:"Vinpearl Safari",lat:10.3370427,lng:103.8914475,d:"3",dx:22,dy:26,a:"start",day:3},
+  rv:{n:6,name:"Rạch Vẹm",lat:10.3761664,lng:103.9395492,d:"3",dx:-22,dy:-12,a:"end",day:3},
+  gw:{n:7,name:"Grand World",lat:10.3283158,lng:103.8627633,d:"3",dx:-22,dy:8,a:"end",day:3},
+  dc:{n:8,name:"Dinh Cậu",lat:10.2178,lng:103.9574,d:"4",dx:-22,dy:8,a:"end",day:4}
 };
 const DAYS=[
- {d:1,c:"--d1",when:"Ngày 1",title:"Đến nơi, hoàng hôn Sunset Town",path:["ap","ic","st","ic"],
-  links:[["Sân bay → InterContinental",["ap","ic"]],["InterContinental → Sunset Town",["ic","st"]]],
+ {d:1,c:"--d1",when:"Thứ Sáu 27/11 · Sự kiện Cathay",title:"Bay vào, Business Outlook và Gala Dinner",path:["ap","ic"],
+  links:[["Sân bay → InterContinental",["ap","ic"]]],
   rows:[
-   ["Khi đến","Sân bay → InterContinental","ap","Khoảng 15 phút. Đi xe đưa đón của resort (hỏi khi đặt phòng), taxi Xanh SM hoặc Grab."],
-   ["~14:00","Nhận phòng InterContinental","ic","Tắm biển Bãi Trường, nghỉ ngơi."],
-   ["~15:30","Nhận xe tự lái tại sảnh resort","ic","Hẹn hãng giao xe trước 16:00. Quay video quanh xe, chụp mức xăng hoặc pin, kiểm tra giấy tờ xe."],
-   ["~16:30","Sunset Town","st","Khoảng 25–30 phút. Ngắm hoàng hôn ở Cầu Hôn, xem show Kiss of the Sea và pháo hoa, ăn tối tại đây."],
-   ["Tối","Về InterContinental","ic",""]]},
- {d:2,c:"--d2",when:"Ngày 2",title:"Cáp treo Hòn Thơm, chuyển lên Mövenpick",path:["ic","st","ht","st","mv"],
+   ["07:50","Bay Hà Nội → Phú Quốc","ap","Sun PhuQuoc Airways 9G1209, hạ cánh 09:55. Check-in online trước giờ bay ít nhất 90 phút.",1],
+   ["~10:00","Đón ở sảnh đến, đưa về resort","ap","Đội Cathay United Bank cầm bảng chào đón ở Arrival Hall và đưa về InterContinental.",1],
+   ["11:30–13:30","Ăn trưa","ic","Phòng Frangipani, tầng 2.",1],
+   ["15:00–17:00","Nhận phòng, nghỉ ngơi","ic","Quầy check-in đoàn ở sảnh tầng 4 (L4). Giờ trống có thể đăng ký hoạt động của resort với lễ tân, ví dụ Full-Body Workout 16:00 hoặc Beach Basketball 17:00.",1],
+   ["17:00–18:30","Đón khách và Business Outlook","ic","Phòng Begonia, tầng 2. Chủ đề: When Rates Stay Higher for Longer; 5 Filters Reshaping the Market in a 5% world, Mr. Amao Kuo (Cathay United Bank).",1],
+   ["18:30–21:00","Gala Dinner","ic","Magnolia Ballroom 3, tầng 2. Trang phục: formal. Có bốc thăm may mắn và karaoke; bế mạc 21:00.",1]]},
+ {d:2,c:"--d2",when:"Thứ Bảy 28/11 · Sáng theo đoàn, chiều tự lái",title:"Du thuyền Gầm Ghì, nhận xe, hoàng hôn Sunset Town",path:["ic","st","mv"],
   links:[["InterContinental → Sunset Town",["ic","st"]],["Sunset Town → Mövenpick",["st","mv"]]],
   rows:[
-   ["Sáng","Tận hưởng InterContinental","ic","Ăn sáng, hồ bơi, biển. Trả phòng ~12:00, hành lý để trên xe."],
-   ["13:30","Cáp treo Hòn Thơm","st","Gửi xe ở ga Sunset Town. Cáp treo nghỉ trưa 11:30–13:30 nên đi chuyến 13:30. Chơi Aquatopia hoặc Exotica đến ~16:30."],
-   ["~16:30","Lái lên Mövenpick","mv","Khoảng 1 tiếng. Xe điện thì sạc đầy từ sáng."],
-   ["~18:00","Nhận phòng Mövenpick Waverly","mv","Ăn tối trong resort, nghỉ ngơi."]]},
- {d:3,c:"--d3",when:"Ngày 3",title:"Safari, sao biển Rạch Vẹm, Grand World",path:["mv","sf","rv","gw","mv"],
+   ["07:00–08:00","Ăn sáng","ic","Nhà hàng Sora & Umi, tầng 2. Xếp hành lý gọn từ sáng vì 12:00 phải trả phòng.",1],
+   ["08:00–10:30","Du thuyền ngắm cảnh đảo Gầm Ghì","ic","Tập trung ở sảnh resort lúc 08:00. Mang đồ bơi, kem chống nắng, mũ, kính, CCCD.",1],
+   ["10:30–12:00","Về resort, trả phòng","ic","Trả phòng trước 12:00.",1],
+   ["12:00–14:00","Ăn trưa, kết thúc chương trình","ic","Phòng Frangipani, tầng 2. Đoàn giải tán lúc 14:00.",1],
+   ["~13:30","Nhận xe tự lái tại sảnh InterContinental","ic","Hẹn hãng giao xe trước 14:00. Quay video quanh xe, chụp mức xăng hoặc pin, chất hành lý lên xe."],
+   ["~14:30","Sunset Town","st","Khoảng 25–30 phút. Còn sức thì đi cáp treo Hòn Thơm (chạy đến 17:00, nên lên trước 15:30). Ngắm hoàng hôn ở Cầu Hôn khoảng 17:30, ăn tối sớm."],
+   ["~19:00","Lái lên Mövenpick Waverly","mv","Khoảng 1 tiếng, trời đã tối nên đi chậm. Báo resort nhận phòng muộn."]]},
+ {d:3,c:"--d3",when:"Chủ Nhật 29/11",title:"Safari, sao biển Rạch Vẹm, Grand World",path:["mv","sf","rv","gw","mv"],
   links:[["Chỉ đường cả ngày",["mv","sf","rv","gw","mv"]]],
   rows:[
    ["9:00","Vinpearl Safari","sf","Mở 9:00–16:00, cần 3–4 tiếng; đi xe buýt safari trước. Thích trò chơi hơn thì thay bằng VinWonders ngay cạnh."],
    ["13:00","Ăn trưa ở Rạch Vẹm: Sao Biển Quán","rv","Hải sản tươi, giá hợp lý. Quán có thuyền đưa ra bãi nhiều sao biển. Đường vào nhỏ, đi chậm."],
    ["~17:00","Grand World","gw","Vào cửa miễn phí, đẹp nhất lúc lên đèn. Đi thuyền kênh Venice, xem show buổi tối, ăn tối."],
    ["Tối","Về Mövenpick","mv","Khoảng 20 phút."]]},
- {d:4,c:"--d4",when:"Ngày 4",title:"Dương Đông, trả xe, bay về",path:["mv","dc","ap"],
+ {d:4,c:"--d4",when:"Thứ Hai 30/11",title:"Dương Đông, trả xe, bay về",path:["mv","dc","ap"],
   links:[["Mövenpick → Dinh Cậu → Sân bay",["mv","dc","ap"]]],
   rows:[
-   ["Sáng","Thư giãn ở Mövenpick","mv","Trả phòng ~11:00–12:00."],
-   ["~12:30","Dinh Cậu","dc","Khoảng 20 phút. Đền thờ trên mỏm đá, view biển, ngay trung tâm Dương Đông."],
-   ["13:00","Ăn trưa: Hải sản Động Tôm Hùm","dc","Chọn hải sản sống, báo giá trước khi chế biến. Bình dân hơn: Phượng Hoàng hoặc Xin Chào. Mua nước mắm, tiêu làm quà quanh Dương Đông."],
-   ["Trước giờ bay","Trả xe ở sân bay","ap","Khoảng 20–25 phút từ Dương Đông. Đổ xăng hoặc sạc trước, có mặt trước giờ bay ít nhất 1,5 tiếng."]]}
+   ["Sáng","Thư giãn ở Mövenpick","mv","Trả phòng ~11:30."],
+   ["~12:00","Dinh Cậu","dc","Khoảng 20 phút. Đền thờ trên mỏm đá, view biển, ngay trung tâm Dương Đông."],
+   ["12:30","Ăn trưa: Hải sản Động Tôm Hùm","dc","Chọn hải sản sống, báo giá trước khi chế biến. Bình dân hơn: Phượng Hoàng hoặc Xin Chào. Mua nước mắm, tiêu làm quà quanh Dương Đông."],
+   ["~15:15","Trả xe ở sân bay","ap","Khoảng 20–25 phút từ Dương Đông. Đổ xăng hoặc sạc trước. Mật ong Rose Myrtle (quà của sự kiện) phải để trong hành lý ký gửi."],
+   ["17:10","Bay Phú Quốc → Hà Nội","ap","Sun PhuQuoc Airways 9G1232, hạ cánh 19:15. Check-in online trước giờ bay ít nhất 90 phút."]]}
 ];
 const RENT=[
  {name:"Mioto",tag:"Ứng dụng đặt xe tự lái",phone:"1900 9217",text:"Mọi xe có bảo hiểm vật chất MIC; nếu chủ xe không liên lạc được, Mioto hỗ trợ đổi xe và chuyển cọc. Hotline 9:00–21:00. Chọn Phú Quốc và đúng ngày để xem xe giao được tận resort."},
@@ -225,7 +230,7 @@ const RENT=[
  {name:"KaneEv",tag:"5,0★ · 13 đánh giá · mở 24h",phone:"0947 668 770",text:"Khách khen hợp đồng rõ ràng, giao xe đúng giờ, xe mới."},
  {name:"Kiên Giang Xanh",tag:"Hãng lâu năm, có xe xăng",phone:"",text:"Số 73 Trần Hưng Đạo, Phú Quốc. Hợp nếu muốn sedan hoặc xe 7 chỗ thay vì xe điện nhỏ."}
 ];
-const CONTACTS=[["InterContinental Phu Quoc","0297 3978 888"],["Mövenpick Resort Waverly","0297 2699 999"],["Taxi Xanh SM","1900 2088"],["Sao Biển Quán (Rạch Vẹm)","0948 766 281"],["Hải sản Động Tôm Hùm","0842 509 840"]];
+const CONTACTS=[["Hỗ trợ sự kiện: Ms. Thuý Tô","0935 386 639"],["Hỗ trợ chuyến bay: Mr. Truyền Đặng","0906 950 528"],["InterContinental Phu Quoc","0297 3978 888"],["Mövenpick Resort Waverly","0297 2699 999"],["Taxi Xanh SM","1900 2088"],["Sao Biển Quán (Rạch Vẹm)","0948 766 281"],["Hải sản Động Tôm Hùm","0842 509 840"]];
 
 const ll=k=>`${S[k].lat},${S[k].lng}`;
 const pin=k=>`https://www.google.com/maps/search/?api=1&query=${ll(k)}`;
@@ -265,7 +270,7 @@ document.getElementById("days").innerHTML=DAYS.map(day=>`
  <section class="day" id="ngay-${day.d}" style="--c:var(${day.c})">
   <div class="dayhead"><div style="display:flex;flex-direction:column;gap:6px"><span class="when">${day.when}</span><h2>${esc(day.title)}</h2></div>
    <div class="links">${day.links.map(([t,ids])=>`<a class="btn" href="${dir(ids)}" target="_blank" rel="noopener">${esc(t)} ↗</a>`).join("")}</div></div>
-  <ol class="tl">${day.rows.map(([t,name,id,note])=>`<li><span class="time">${esc(t)}</span><div class="what"><h3><a href="${pin(id)}" target="_blank" rel="noopener">${esc(name)}</a> <span class="dot" style="background:var(${day.c});width:20px;height:20px;vertical-align:2px">${S[id].n}</span></h3>${note?`<p>${esc(note)}</p>`:""}</div></li>`).join("")}</ol>
+  <ol class="tl">${day.rows.map(([t,name,id,note,ev])=>`<li><span class="time">${esc(t)}</span><div class="what"><h3><a href="${pin(id)}" target="_blank" rel="noopener">${esc(name)}</a> <span class="dot" style="background:var(${day.c});width:20px;height:20px;vertical-align:2px">${S[id].n}</span>${ev?`<span class="ev">Chương trình Cathay</span>`:""}</h3>${note?`<p>${esc(note)}</p>`:""}</div></li>`).join("")}</ol>
  </section>`).join("");
 
 /* copy helper */
